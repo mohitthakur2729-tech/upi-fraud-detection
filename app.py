@@ -1,19 +1,15 @@
 import os
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+import joblib
 import tensorflow as tf
 from flask import Flask, request, render_template
 
-dataset = pd.read_csv('dataset/upi_fraud_dataset.csv', index_col=0)
+# Load the pre-fitted scaler (must match the one used during model training)
+scaler = joblib.load('filesuse/scaler.pkl')
 
-x = dataset.iloc[:, : 10].values
-y = dataset.iloc[:, 10].values
-
-scaler = StandardScaler()
-scaler.fit_transform(x)
-
-model = tf.keras.models.load_model('filesuse\project_model1.h5')
+# Load the trained model
+model = tf.keras.models.load_model('filesuse/project_model1.h5')
 
 app = Flask(__name__)
 
@@ -24,8 +20,9 @@ def first():
 @app.route('/login')
 def login():
     return render_template('login.html')
+@app.route('/home')
 def home():
-	return render_template('home.html')
+    return render_template('home.html')
 @app.route('/upload')
 def upload():
     return render_template('upload.html')  
