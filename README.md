@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # UPI Fraud Detection
 
 ## Overview
@@ -67,3 +68,7 @@ Play the video below: ⬇️
 
 
 
+=======
+# upi-fraud-detection
+This project focuses on detecting fraudulent transactions within the Unified Payments Interface (UPI) system using machine learning techniques. This system aims to identify and prevent potential fraudulent activities by analyzing transaction patterns and anomalies.
+>>>>>>> 93580c536913fa37fa430579f393f1129b662d11
