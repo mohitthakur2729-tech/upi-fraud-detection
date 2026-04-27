@@ -4,251 +4,186 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>UPI Fraud Detection</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../static/img/favicon.png" rel="icon">
-  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="../static/img/favicon.svg" rel="icon" type="image/svg+xml">
+  <link href="../static/img/apple-touch-icon.svg" rel="apple-touch-icon" type="image/svg+xml">
+  <meta name="theme-color" content="#0a0e27">
 
   <!-- Vendor CSS Files -->
-  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
   <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="../static/css/style2.css" rel="stylesheet">
+  <!-- Modern Theme CSS -->
+  <link href="../static/css/modern-theme.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Kelly - v4.6.0
-  * Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    .preview-table-container {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-glass);
+    }
+
+    .preview-table-container table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+    }
+
+    .preview-table-container th,
+    .preview-table-container td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-glass);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .preview-table-container th {
+      background: rgba(0, 242, 255, 0.08);
+      color: var(--accent-cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.75rem;
+      position: sticky;
+      top: 0;
+    }
+
+    .preview-table-container tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-primary);
+    }
+
+    .preview-table-container tr:last-child td {
+      border-bottom: none;
+    }
+
+    .train-btn {
+      position: relative;
+    }
+
+    .train-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top-color: var(--accent-cyan);
+      border-right-color: var(--accent-magenta);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 8px;
+    }
+
+    .train-btn.loading .spinner {
+      display: inline-block;
+    }
+
+    .train-btn.loading .btn-text {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ======= Top Bar ======= -->
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-cente">
+  <!-- Header -->
+  <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-
-      <h1 class="col-lg-8"><a href="index.html"> <span>UPI Fraud Detection</span></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <h1 class="logo"><a href="{{ url_for('first') }}"><span>UPI</span> Fraud Detection</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="{{ url_for('first')}}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{ url_for('login')}}">Login</a></li>
-          <li><a class="nav-link scrollto active " href="{{ url_for('upload')}}">Upload</a></li>
-
-
-
-          <li><a class="nav-link scrollto" href="{{ url_for('prediction1')}}">Check</a></li>
-
-          <li><a class="nav-link scrollto" href="{{ url_for('chart')}}">Chart</a></li>
-
-
-
-
-
-
-
+          <li><a class="nav-link" href="{{ url_for('first') }}">Home</a></li>
+          <li><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <li><a class="nav-link active" href="{{ url_for('upload') }}">Upload</a></li>
+          <li><a class="nav-link" href="{{ url_for('prediction1') }}">Check</a></li>
+          <li><a class="nav-link" href="{{ url_for('chart') }}">Chart</a></li>
         </ul>
-
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
     </div>
-  </header><!-- End Header -->
+  </header>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-      <div class="row">
-        <div class="col-lg-8">
-          <h1><span>UPI Fraud Detection Using
-              Machine Learning Approaches</span></h1>
-
-
-        </div>
-
-
+  <!-- Hero Section -->
+  <section id="hero" class="d-flex align-items-center justify-content-center" style="min-height: 40vh;">
+    <canvas id="particle-canvas"></canvas>
+    <div class="container position-relative" style="z-index: 2;">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="section-title" data-animate>
+            <h2>Dataset Preview</h2>
+            <p>Review your uploaded data before training</p>
+          </div>
       </div>
-    </div>
   </section>
 
-
-
-
-
-
-  <section id="book-a-table" class="book-a-table">
-    <div class="container" data-aos="fade-up">
-
-
-
-
-
-
-
-
-
-      <div class="section-title">
-
-        <center>
-          <p>Preview</p>
-        </center>
-      </div>
-
-      <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-
-
-        <!-- Custom fonts for this theme -->
-        <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css">
-
-        <!-- Theme CSS -->
-        <link href="css/freelancer.min.css" rel="stylesheet">
-        <style>
-          #loading {
-            background: url('../static/ajax-loader.gif') no-repeat center center;
-            position: absolute;
-            top: 0;
-            left: 59;
-            height: 100%;
-            width: 86%;
-            z-index: 9999999;
-          }
-
-          body {
-
-            background-color: #cccccc;
-          }
-        </style>
-
-
-      </head>
-      <h2 class="text-center text-uppercase text-secondary mb-0">Preview</h2>
-
-      <body id="page-top">
-
-        <!-- Navigation -->
-
-
-        <!-- Contact Section -->
-        <section class="page-section" id="contact">
-          <div class="container">
-            <br>
-            <br>
-            <!-- Contact Section Heading -->
-
-
-            <!-- Icon Divider -->
-            <div class="divider-custom">
-              <div class="divider-custom-line"></div>
-              <div class="divider-custom-icon">
-                <i class="fas fa-star"></i>
-              </div>
-              <div class="divider-custom-line"></div>
-            </div>
-
-            <!-- Contact Section Form -->
-            <div class="row" style="margin-left:-250px">
-              <div class="col-lg-8 mx-auto">
-                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                {{ df_view.to_html(classes="table striped",na_rep="-") | safe}}
-              </div>
-
-            </div>
-
-        </section>
-        </br>
-        <div class="form-group" style="padding:0px 250px 10px 40px;height:200px">
-          <input style="margin-left:200px" type="button" onclick="hideLoader()" class="btn btn-primary"
-            value="Click to Train | Test" />
-          <div id="loading" style="display:None;margin-top:552950px"></div>
+  <!-- Preview Section -->
+  <section class="pb-5" style="margin-top: -60px; position: relative; z-index: 3;">
+    <div class="container">
+      <div class="glass-card" data-animate data-delay="200">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 style="color: var(--text-primary); margin: 0;">
+            <i class="bi bi-table" style="color: var(--accent-cyan); margin-right: 8px;"></i>
+            Data Preview
+          </h4>
+          <span class="badge" style="background: rgba(0, 242, 255, 0.1); color: var(--accent-cyan); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem;">
+            {{ df_view.shape[0] }} rows &times; {{ df_view.shape[1] }} cols
+          </span>
         </div>
 
+        <div class="preview-table-container">
+          {{ df_view.to_html(classes="table", na_rep="-") | safe }}
+        </div>
 
-
-
-
-
-
-        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
-        <script type='text/javascript'>
-
-          function hideLoader() {
-            $('#loading').show(0).delay(10000).hide(0, function () {
-              alert("Training finished!");
-              window.location = "{{url_for('prediction1')}}";
-            });
-          }
-
-
-        </script>
-
-
-      </body>
-
-    </div>
+      <div class="text-center mt-5" data-animate data-delay="400">
+        <button type="button" class="btn-primary train-btn" id="trainBtn" onclick="startTraining()">
+          <span class="btn-text"><i class="bi bi-cpu"></i> Click to Train | Test</span>
+          <span class="spinner"></span>
+        </button>
+      </div>
   </section>
 
-
-
-  <!-- ======= Footer ======= -->
+  <!-- Footer -->
   <footer id="footer">
-
-
     <div class="container">
       <div class="copyright">
-
+        &copy; <strong><span>UPI Fraud Detection</span></strong>. All Rights Reserved.
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+  </footer>
 
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../static/vendor/aos/aos.js"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../static/vendor/php-email-form/validate.js"></script>
-  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="../static/js/main.js"></script>
+  <!-- Modern Animations -->
+  <script src="../static/js/animations.js"></script>
 
+  <script>
+    function startTraining() {
+      const btn = document.getElementById('trainBtn');
+      btn.classList.add('loading');
+
+      setTimeout(() => {
+        alert("Training finished!");
+        window.location = "{{ url_for('prediction1') }}";
+      }, 3000);
+    }
+  </script>
 </body>
 
 </html>

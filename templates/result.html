@@ -1,42 +1,233 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> UPI Fraud Detection </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="../static/css/result.css" type="text/css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>UPI Fraud Detection</title>
+
+  <!-- Favicons -->
+  <link href="../static/img/favicon.svg" rel="icon" type="image/svg+xml">
+  <link href="../static/img/apple-touch-icon.svg" rel="apple-touch-icon" type="image/svg+xml">
+  <meta name="theme-color" content="#0a0e27">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Modern Theme CSS -->
+  <link href="../static/css/modern-theme.css" rel="stylesheet">
+
+  <style>
+    .result-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-container::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .result-card {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius);
+      padding: 4rem 3rem;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      transition: var(--transition);
+    }
+
+    .result-card:hover {
+      border-color: var(--border-glass-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .result-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      animation: iconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    @keyframes iconPop {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .result-text {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      font-family: var(--font-heading);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .result-subtext {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .result-valid {
+      color: var(--accent-green);
+      text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    }
+
+    .result-valid ~ .result-icon {
+      color: var(--accent-green);
+      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.5));
+    }
+
+    .result-fraud {
+      color: var(--accent-red);
+      text-shadow: 0 0 30px rgba(255, 51, 102, 0.4);
+      animation: dangerPulse 2s ease-in-out infinite;
+    }
+
+    .result-fraud ~ .result-icon {
+      color: var(--accent-red);
+      filter: drop-shadow(0 0 20px rgba(255, 51, 102, 0.5));
+    }
+
+    @keyframes dangerPulse {
+      0%, 100% {
+        text-shadow: 0 0 30px rgba(255, 51, 102, 0.4);
+      }
+      50% {
+        text-shadow: 0 0 50px rgba(255, 51, 102, 0.7);
+      }
+    }
+
+    .pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 2px solid;
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .pulse-ring.active {
+      animation: pulseRing 2s ease-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+      animation: scan 3s ease-in-out infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes scan {
+      0% {
+        top: 0;
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container register-form">
-        <div class="heading">
-            <p>RESULT</p>
-        </div>
-        <div class="form-content">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <p id="output">{{OUTPUT}}</p>
-                </div>
-            </div>
-            <div id="btn" class="col">
-                <button type="submit" class="btnSubmit" onclick="location.href='/'" ;>Back to Home</button>
-            </div>
-        </div>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <div class="result-container">
+    <div class="scan-line"></div>
+
+    <div class="result-card" data-animate>
+      <div id="pulseRing" class="pulse-ring"></div>
+
+      <div id="outputIcon" class="result-icon">
+        <i class="bi bi-question-circle"></i>
+      </div>
+
+      <h1 id="output" class="result-text">{{ OUTPUT }}</h1>
+      <p class="result-subtext">Analysis complete based on transaction parameters</p>
+
+      <button type="button" class="btn-primary" onclick="location.href='/'">
+        <i class="bi bi-house-door"></i> Back to Home
+      </button>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../static/js/result.js"></script>
+
+  <!-- Modern Animations -->
+  <script src="../static/js/animations.js"></script>
+
+  <script>
+    (function () {
+      const output = document.getElementById('output');
+      const icon = document.getElementById('outputIcon');
+      const pulseRing = document.getElementById('pulseRing');
+      const text = output.textContent.trim();
+
+      if (text.includes('VALID')) {
+        output.classList.add('result-valid');
+        icon.innerHTML = '<i class="bi bi-shield-check"></i>';
+        pulseRing.style.borderColor = 'var(--accent-green)';
+        pulseRing.classList.add('active');
+      } else if (text.includes('FRAUD')) {
+        output.classList.add('result-fraud');
+        icon.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i>';
+        pulseRing.style.borderColor = 'var(--accent-red)';
+        pulseRing.classList.add('active');
+      }
+    })();
+  </script>
 </body>
 
 </html>

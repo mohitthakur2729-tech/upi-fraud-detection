@@ -4,151 +4,137 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>UPI Fraud Detection</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../static/img/favicon.png" rel="icon">
-  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="../static/img/favicon.svg" rel="icon" type="image/svg+xml">
+  <link href="../static/img/apple-touch-icon.svg" rel="apple-touch-icon" type="image/svg+xml">
+  <meta name="theme-color" content="#0a0e27">
 
   <!-- Vendor CSS Files -->
-  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
   <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="../static/css/style3.css" rel="stylesheet">
-
-
+  <!-- Modern Theme CSS -->
+  <link href="../static/css/modern-theme.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex justify-content-center justify-content-md-between">
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-
-
-
-    </div>
-  </div>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-cente">
+  <!-- Header -->
+  <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-
-      <h1 class="col-lg-8"><a href="first.html"> <span>UPI Fraud Detection</span></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="../static/img/logo.png" alt="" class="img-fluid"></a>-->
+      <h1 class="logo"><a href="{{ url_for('first') }}"><span>UPI</span> Fraud Detection</a></h1>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="{{ url_for('first')}}">Home</a></li>
-
-          <li><a class="nav-link scrollto" href="{{ url_for('login')}}">Login</a></li>
-
-          <li><a class="nav-link scrollto" href="{{ url_for('upload')}}">Upload</a></li>
-
-
-          <li><a class="nav-link scrollto" href="{{ url_for('prediction1')}}">Check</a></li>
-
-          <li><a class="nav-link scrollto" href="{{ url_for('chart')}}">Chart</a></li>
-
-
-
-
+          <li><a class="nav-link active" href="{{ url_for('first') }}">Home</a></li>
+          <li><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+          <li><a class="nav-link" href="{{ url_for('upload') }}">Upload</a></li>
+          <li><a class="nav-link" href="{{ url_for('prediction1') }}">Check</a></li>
+          <li><a class="nav-link" href="{{ url_for('chart') }}">Chart</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-
+      </nav>
     </div>
-  </header><!-- End Header -->
+  </header>
 
-
-
-  <!-- ======= Hero Section ======= -->
+  <!-- Hero Section -->
   <section id="hero" class="d-flex align-items-center">
-    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-      <div class="row">
+    <canvas id="particle-canvas"></canvas>
+    <div class="container position-relative" style="z-index: 2;">
+      <div class="row align-items-center">
         <div class="col-lg-8">
-          <h1>UPI Fraud Detection Using
-            Machine Learning Approaches</h1>
-
-          <div class="btns">
-            <a href="#about" class="btn-menu animated fadeInUp scrollto">Abstract</a>
-
+          <h1 data-typing="UPI Fraud Detection Using Machine Learning" data-typing-speed="60"></h1>
+          <h2>Advanced CNN-based fraud detection framework to identify suspicious transaction patterns in real-time.</h2>
+          <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.25); padding: 12px 24px; border-radius: 50px; margin-top: 1.5rem;">
+            <img src="../static/img/favicon.svg" alt="High Accuracy" style="width: 28px; height: 28px; filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));">
+            <span style="color: #00ff88; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px;">High Accuracy</span>
+          </div>
+          <div class="btns mt-4">
+            <a href="#about" class="btn-about">Explore Abstract</a>
           </div>
         </div>
-
-
       </div>
     </div>
-  </section><!-- End Hero -->
+  </section>
 
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
-
-          </div>
-          <div class="col-lg-4 ml-auto" style="margin-left:360px;">
-            <center>
-              <h3>Abstract</h3>
-            </center>
-          </div>
-          </br>
-          </br>
-          <p>
-            UPI Fraud is becoming more and more popular in financial transactions, at the same time frauds are also
-            increasing. Conventional methods use rule-based expert systems to detect fraud behaviors, neglecting diverse
-            situations, extreme imbalance of positive and negative samples. In this paper, we propose a CNN-based fraud
-            detection framework, to capture the intrinsic patterns of fraud behaviors learned from labeled data.
-            Abundant transaction data is represented by a feature matrix, on which a convolutional neural network is
-            applied to identify a set of latent patterns for each sample. Experiments on real-world massive transactions
-            of a major commercial bank demonstrate its superior performance compared with some state-of-the-art methods.
-          </p>
-
-
-        </div>
-
+  <!-- About Section -->
+  <section id="about" class="mt-7 mb-6">
+    <div class="container">
+      <div class="section-title" data-animate>
+        <h2>Abstract</h2>
+        <p>Understanding our approach to securing digital transactions</p>
       </div>
 
+      <div class="glass-card" data-animate data-delay="200">
+        <div class="row align-items-center">
+          <div class="col-lg-12">
+            <p style="color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem;">
+              UPI Fraud is becoming more and more prevalent in financial transactions, and at the same time, frauds are
+              increasing. Conventional methods use rule-based expert systems to detect fraud behaviors, neglecting
+              diverse situations and the extreme imbalance of positive and negative samples. In this paper, we propose a
+              <strong style="color: var(--accent-cyan);">CNN-based fraud detection framework</strong>, to capture the
+              intrinsic patterns of fraud behaviors learned from labeled data. Abundant transaction data is represented
+              by a feature matrix, on which a convolutional neural network is applied to identify a set of latent
+              patterns for each sample. Experiments on real-world massive transactions of a major commercial bank
+              demonstrate its <strong style="color: var(--accent-magenta);">superior performance</strong> compared with
+              some state-of-the-art methods.
+            </p>
+          </div>
+        </div>
+      </div>
 
+      <!-- Feature Cards -->
+      <div class="row mt-5">
+        <div class="col-md-4 mb-4" data-animate data-delay="100">
+          <div class="glass-card text-center h-100">
+            <i class="bi bi-shield-check" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 1rem; display: block;"></i>
+            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Real-time Detection</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Instant fraud identification using trained CNN models on transaction data.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-animate data-delay="200">
+          <div class="glass-card text-center h-100">
+            <i class="bi bi-cpu" style="font-size: 3rem; color: var(--accent-magenta); margin-bottom: 1rem; display: block;"></i>
+            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Machine Learning</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Deep convolutional neural networks extract latent patterns from feature matrices.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-animate data-delay="300">
+          <div class="glass-card text-center h-100">
+            <i class="bi bi-award-fill" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 1rem; display: block;"></i>
+            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">High Accuracy</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Superior performance validated on massive real-world banking transactions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <strong><span>UPI Fraud Detection</span></strong>. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
 
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-      <!-- ======= Footer ======= -->
-      <!-- End Footer -->
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-
-
-      <!-- Vendor JS Files -->
-      <script src="../static/vendor/aos/aos.js"></script>
-      <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
-      <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-      <script src="../static/vendor/php-email-form/validate.js"></script>
-      <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
-
-      <!-- Template Main JS File -->
-      <script src="../static/js/main.js"></script>
-
+  <!-- Modern Animations -->
+  <script src="../static/js/animations.js"></script>
 </body>
 
 </html>
+
