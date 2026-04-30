@@ -57,6 +57,13 @@
       color: var(--accent-cyan);
       min-height: 24px;
     }
+
+    .upload-error {
+      margin-top: 1rem;
+      color: var(--accent-red);
+      font-size: 0.9rem;
+      min-height: 24px;
+    }
   </style>
 </head>
 
@@ -105,11 +112,12 @@
         <div class="col-md-8 col-lg-6" data-animate data-delay="200">
           <form action="/preview" name="fs" id="fs" method="post" enctype="multipart/form-data">
             <div class="upload-zone glass-card" id="dropZone">
-              <input type="file" name="datasetfile" id="file1" required onchange="showFileName(this)">
+              <input type="file" name="datasetfile" id="file1" accept=".csv,text/csv" required onchange="showFileName(this)">
               <i class="bi bi-cloud-arrow-up upload-icon"></i>
               <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Drag & Drop or Click to Upload</h4>
-              <p style="color: var(--text-muted); font-size: 0.9rem;">Supported formats: All file types including screenshots, CSV, Excel, PDF, and more</p>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Supported format: CSV dataset only</p>
               <div class="file-name" id="fileName"></div>
+              <div class="upload-error" id="fileError">{{ error or '' }}</div>
             </div>
 
             <div class="text-center mt-4">
@@ -143,8 +151,17 @@
   <script>
     function showFileName(input) {
       const fileName = document.getElementById('fileName');
+      const fileError = document.getElementById('fileError');
       if (input.files && input.files.length > 0) {
-        fileName.textContent = 'Selected: ' + input.files[0].name;
+        const selectedFile = input.files[0];
+        if (!selectedFile.name.toLowerCase().endsWith('.csv')) {
+          input.value = '';
+          fileName.textContent = '';
+          fileError.textContent = 'Only CSV files are allowed for training.';
+          return;
+        }
+        fileError.textContent = '';
+        fileName.textContent = 'Selected: ' + selectedFile.name;
       }
     }
 
